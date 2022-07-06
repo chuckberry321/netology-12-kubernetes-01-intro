@@ -79,6 +79,7 @@ root@epd9ks7lf20rq7r06tug:/home/vagrant#
 
 # Задача 2: Запуск Hello World
 
+Развернули Minikube
 
 ```
 vagrant@epd9ks7lf20rq7r06tug:~$ sudo kubectl get services
@@ -89,6 +90,8 @@ vagrant@epd9ks7lf20rq7r06tug:~$
 ```
 
 ![Services](/images/1.png)
+
+Установили аддоны ingress и dashboard
 
 ```
 vagrant@epd9ks7lf20rq7r06tug:/$ sudo minikube addons list
