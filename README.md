@@ -80,3 +80,89 @@ root@epd9ks7lf20rq7r06tug:/home/vagrant#
 # Задача 2: Запуск Hello World
 
 
+```
+vagrant@epd9ks7lf20rq7r06tug:~$ sudo kubectl get services
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
+hello-node   LoadBalancer   10.103.18.26   158.160.3.47   8080:32587/TCP   58m
+kubernetes   ClusterIP      10.96.0.1      <none>         443/TCP          120m
+vagrant@epd9ks7lf20rq7r06tug:~$
+```
+
+![Services](/images/1.png)
+
+```
+vagrant@epd9ks7lf20rq7r06tug:/$ sudo minikube addons list
+|-----------------------------|----------|--------------|--------------------------------|
+|         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+|-----------------------------|----------|--------------|--------------------------------|
+| ambassador                  | minikube | disabled     | 3rd party (Ambassador)         |
+| auto-pause                  | minikube | disabled     | Google                         |
+| csi-hostpath-driver         | minikube | disabled     | Kubernetes                     |
+| dashboard                   | minikube | enabled ✅   | Kubernetes                     |
+| default-storageclass        | minikube | enabled ✅   | Kubernetes                     |
+| efk                         | minikube | disabled     | 3rd party (Elastic)            |
+| freshpod                    | minikube | disabled     | Google                         |
+| gcp-auth                    | minikube | disabled     | Google                         |
+| gvisor                      | minikube | disabled     | Google                         |
+| headlamp                    | minikube | disabled     | kinvolk.io                     |
+| helm-tiller                 | minikube | disabled     | 3rd party (Helm)               |
+| inaccel                     | minikube | disabled     | InAccel <info@inaccel.com>     |
+| ingress                     | minikube | enabled ✅   | 3rd party (unknown)            |
+| ingress-dns                 | minikube | disabled     | Google                         |
+| istio                       | minikube | disabled     | 3rd party (Istio)              |
+| istio-provisioner           | minikube | disabled     | 3rd party (Istio)              |
+| kong                        | minikube | disabled     | 3rd party (Kong HQ)            |
+| kubevirt                    | minikube | disabled     | 3rd party (KubeVirt)           |
+| logviewer                   | minikube | disabled     | 3rd party (unknown)            |
+| metallb                     | minikube | disabled     | 3rd party (MetalLB)            |
+| metrics-server              | minikube | disabled     | Kubernetes                     |
+| nvidia-driver-installer     | minikube | disabled     | Google                         |
+| nvidia-gpu-device-plugin    | minikube | disabled     | 3rd party (Nvidia)             |
+| olm                         | minikube | disabled     | 3rd party (Operator Framework) |
+| pod-security-policy         | minikube | disabled     | 3rd party (unknown)            |
+| portainer                   | minikube | disabled     | Portainer.io                   |
+| registry                    | minikube | disabled     | Google                         |
+| registry-aliases            | minikube | disabled     | 3rd party (unknown)            |
+| registry-creds              | minikube | disabled     | 3rd party (UPMC Enterprises)   |
+| storage-provisioner         | minikube | enabled ✅   | Google                         |
+| storage-provisioner-gluster | minikube | disabled     | 3rd party (unknown)            |
+| volumesnapshots             | minikube | disabled     | Kubernetes                     |
+|-----------------------------|----------|--------------|--------------------------------|
+vagrant@epd9ks7lf20rq7r06tug:/$
+```
+
+![Addons](/images/2.png)
+
+
+# Задача 3: Установить kubectl
+
+С локальной VM на внешний сервер на Yandex Cloud
+
+```
+vagrant@vagrant:~/netology-12-kubernetes-01-intro$ kubectl port-forward service/hello-node 8083:8080
+Forwarding from 127.0.0.1:8083 -> 8080
+Forwarding from [::1]:8083 -> 8080
+Handling connection for 8083
+```
+
+```
+vagrant@vagrant:~$ curl 127.0.0.1:8083
+CLIENT VALUES:
+client_address=127.0.0.1
+command=GET
+real path=/
+query=nil
+request_version=1.1
+request_uri=http://127.0.0.1:8080/
+
+SERVER VALUES:
+server_version=nginx: 1.10.0 - lua: 10001
+
+HEADERS RECEIVED:
+accept=*/*
+host=127.0.0.1:8083
+user-agent=curl/7.68.0
+BODY:
+-no body in request-vagrant@vagrant:~$
+```
+
